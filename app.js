@@ -7,7 +7,7 @@ const router = express.Router();
 app.use(cors());
 
 // Listen on port 3000
-const port = 3000;
+const port = process.env.PORT || 3000;
 const host = "http://localhost:";
 
 http.listen(port, () => console.log(`Server listening ${host}${port}`));
