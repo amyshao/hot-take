@@ -4,7 +4,6 @@ Get quick and easy feedback from friends! No login no hassle.
 Save yourself from that ugly profile pic. 
 
 Link here: https://hot-take.herokuapp.com/  
-Check out an existing room: https://hot-take.herokuapp.com/room/1454  
   
 Submitted as part of Shopify's Backend Internship Application Project 
 
@@ -20,13 +19,8 @@ Clone the repo
 ```
 git clone https://github.com/amyshao/hot-take
 ```  
-Run the Express server on ``localhost:3000``
+Run the Express server with React app on ``localhost:3000``
 ```
-npm start
-```
-Start the React app 
-```
-cd client
 npm start
 ```
 Run test suite
