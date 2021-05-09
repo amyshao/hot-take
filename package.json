@@ -2,6 +2,9 @@
     "name": "hot-take-backend",
     "version": "0.0.0",
     "description": "A ranker for hot takes",
+    "directories": {
+        "test": "test"
+    },
     "dependencies": {
         "axios": "^0.21.1",
         "cors": "^2.8.5",
@@ -9,12 +12,16 @@
         "node-fetch": "^2.6.1",
         "request": "^2.88.2"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "chai": "4.2.0",
+        "chai-http": "4.2.1",
+        "mocha": "5.2.0"
+    },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha --timeout 10000",
         "start": "node app.js",
         "heroku-postbuild": "cd client && npm install && npm run build"
     },
     "author": "",
-    "license": "MIT"
+    "license": "ISC"
 }
