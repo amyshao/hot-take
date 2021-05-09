@@ -12,7 +12,7 @@ const host = "http://localhost:";
 
 http.listen(port, () => console.log(`Server listening ${host}${port}`));
 app.use('/api', router);
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 /* MODELS
 
