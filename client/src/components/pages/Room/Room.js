@@ -23,6 +23,7 @@ const Room = (props) => {
             setLoading(false);
         }
         if (shouldFetch) {
+            getImages();
             setShouldFetch(false);
         }
     }, [roomId, images, shouldFetch]);
