@@ -1,5 +1,5 @@
 # hot-take
-A ranking platform for hot photos you take ie your sexy instagram pics  
+A ranking platform for **_hot_** photos you **_take_** ie your sexy instagram pics  
 Get quick and easy feedback from friends! No login no hassle.  
 Save yourself from that ugly profile pic. 
 
