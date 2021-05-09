@@ -9,6 +9,7 @@ const Room = (props) => {
     const [totalRanking, setTotalRanking] = useState([]);
     const [shouldFetch, setShouldFetch] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getImages = async () => {
@@ -19,9 +20,11 @@ const Room = (props) => {
             for (let i = 0; i < response.data.length; i++) {
                 setImages(images => [...images, response.data[i].imageURL]);
             }
+            setLoading(false);
         }
-        if (shouldFetch) getImages();
-        setShouldFetch(false);
+        if (shouldFetch) {
+            setShouldFetch(false);
+        }
     }, [roomId, images, shouldFetch]);
 
     useEffect(() => {
@@ -73,10 +76,10 @@ const Room = (props) => {
     return (
         <div className="room">
             <header>
-                {images.length === 0 && (
+                {!loading && images.length === 0 && (
                     <h1>Sorry, it seems this room does not exist :(</h1>
                 )}
-                {images.length > 0 && (
+                {!loading && images.length > 0 && (
                     <h1>Room {roomId}</h1>
                 )}
             </header>
