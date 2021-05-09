@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './Room.css';
 
-const HOST = "http://localhost:3000";
-
 const Room = (props) => {
     const { roomId } = props;
     const [images, setImages] = useState([]);
@@ -15,7 +13,7 @@ const Room = (props) => {
     useEffect(() => {
         const getImages = async () => {
             console.log("lets get the data");
-            const url = `${HOST}/api/getImages/${roomId}`;
+            const url = `/api/getImages/${roomId}`;
             const response = await axios.get(url);
             console.log("fetched images: ", response.data);
             for (let i = 0; i < response.data.length; i++) {
@@ -28,7 +26,7 @@ const Room = (props) => {
 
     useEffect(() => {
         const getScore = async () => {
-            const url = `${HOST}/api/getScores/${roomId}`;
+            const url = `/api/getScores/${roomId}`;
             try {
                 const response = await axios.get(url);
                 //console.log(response.data);
@@ -48,7 +46,7 @@ const Room = (props) => {
     });
 
     const addRanking = async () => {
-        const url = `${HOST}/api/addRanking/${roomId}?ranking=${JSON.stringify(images)}`;
+        const url = `/api/addRanking/${roomId}?ranking=${JSON.stringify(images)}`;
         try {
             await axios.post(url);
             console.log(`added ${images} to room ${roomId}`);
