@@ -1,0 +1,92 @@
+
+.room {
+    height: 100vh;
+    background-color: ;
+}
+
+.body-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    min-height: 90%;
+    background-color: #E1E8ED;
+}
+
+header {
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #292F33;
+    color: white;
+}
+
+li {
+    background-color: white;
+    list-style-type: none;
+    border: 5px solid #bccad6;
+    margin: 10px;
+    border-radius: 15px;
+}
+li:hover {
+    border: 5px solid #9da9b4;
+}
+
+p {
+    font-size: 20px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+img {
+    padding: 10px;
+}
+
+.ranking-image {
+    max-height: 300px;
+}
+
+.total-rank-image {
+    max-height: 200px;
+}
+
+.ranking-container {
+    width: 70%;
+    padding: 50px;
+}
+
+.total-rank-image-container {
+    padding: 5px;
+    border: 3px solid #bccad6;
+    margin: 10px;
+}
+
+.total-rank-container {
+    width: 30%;
+    background-color: white;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+button {
+    height: 50px;
+    font-size: 30px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px 10px 20px;
+    background-color: #292F33;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.7;
+    color: white;
+}
+
