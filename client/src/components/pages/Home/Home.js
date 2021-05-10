@@ -5,7 +5,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 import './Home.css';
 
 const MAX_IMAGE_SIZE = 1000000000;
-const HOST = "http://localhost:3000";
 const API_ENDPOINT =
     "https://9pvz8m4uj1.execute-api.ca-central-1.amazonaws.com/default/getPresignedURL";
 
@@ -78,7 +77,7 @@ const Home = () => {
     };
 
     const addImageToRoom = async (roomId, imageURL) => {
-        const url = `${HOST}/api/addImages/${roomId}?src=${imageURL}`;
+        const url = `/api/addImages/${roomId}?src=${imageURL}`;
         try {
             await axios.post(url);
             console.log(`added ${imageURL} to room ${roomId}`);
@@ -90,7 +89,7 @@ const Home = () => {
 
     const createRoom = async () => {
         setLoading(true);
-        const url = `${HOST}/api/createRoom`;
+        const url = `/api/createRoom`;
         try {
             const response = await axios.post(url);
             console.log(`created room ${response.data["roomId"]} with response: `, response);

@@ -3,32 +3,34 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './Room.css';
 
-const HOST = "http://localhost:3000";
-
 const Room = (props) => {
     const { roomId } = props;
     const [images, setImages] = useState([]);
     const [totalRanking, setTotalRanking] = useState([]);
     const [shouldFetch, setShouldFetch] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getImages = async () => {
             console.log("lets get the data");
-            const url = `${HOST}/api/getImages/${roomId}`;
+            const url = `/api/getImages/${roomId}`;
             const response = await axios.get(url);
             console.log("fetched images: ", response.data);
             for (let i = 0; i < response.data.length; i++) {
                 setImages(images => [...images, response.data[i].imageURL]);
             }
+            setLoading(false);
         }
-        if (shouldFetch) getImages();
-        setShouldFetch(false);
+        if (shouldFetch) {
+            getImages();
+            setShouldFetch(false);
+        }
     }, [roomId, images, shouldFetch]);
 
     useEffect(() => {
         const getScore = async () => {
-            const url = `${HOST}/api/getScores/${roomId}`;
+            const url = `/api/getScores/${roomId}`;
             try {
                 const response = await axios.get(url);
                 //console.log(response.data);
@@ -48,7 +50,7 @@ const Room = (props) => {
     });
 
     const addRanking = async () => {
-        const url = `${HOST}/api/addRanking/${roomId}?ranking=${JSON.stringify(images)}`;
+        const url = `/api/addRanking/${roomId}?ranking=${JSON.stringify(images)}`;
         try {
             await axios.post(url);
             console.log(`added ${images} to room ${roomId}`);
@@ -75,10 +77,10 @@ const Room = (props) => {
     return (
         <div className="room">
             <header>
-                {images.length === 0 && (
+                {!loading && images.length === 0 && (
                     <h1>Sorry, it seems this room does not exist :(</h1>
                 )}
-                {images.length > 0 && (
+                {!loading && images.length > 0 && (
                     <h1>Room {roomId}</h1>
                 )}
             </header>

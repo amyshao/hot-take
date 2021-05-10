@@ -34,16 +34,29 @@ Ranking {
 
 var rooms = [];
 
+app.get('/room/*', function (req, res) {
+    const temp = req.params.var;
+    console.log("temp: ", temp);
+    if (temp !== "api") {
+        res.sendFile(path.join(__dirname, 'client/build/index.html'), function (err) {
+            if (err) {
+                res.status(500).send(err)
+            }
+        });
+    }
+});
+
 router.post("/createRoom", function (req, res) {
+    const providedId = req.query.id;
     const uniqueRoomId = Math.floor(Math.random() * 9999);
     rooms.push({
-        roomId: uniqueRoomId,
+        roomId: providedId || uniqueRoomId,
         images: [],
         rankings: [],
         scores: new Map(),
     });
     console.log('rooms: ', rooms);
-    res.json({ roomId: uniqueRoomId });
+    res.json({ roomId: providedId || uniqueRoomId });
 });
 
 router.post("/addImages/:roomId", async function (req, res) {
@@ -60,10 +73,10 @@ router.post("/addImages/:roomId", async function (req, res) {
         });
         room["scores"].set(imageURL, 0);
         console.log(`[SUCCESS]    Added image: ${imageURL} to room: ${roomId}`);
-        console.log('rooms: ',rooms);
+        console.log('rooms: ', rooms);
         res.json({ message: "SUCCESS" });
     } catch (e) {
-        res.json([]);
+        res.json({ message: "FAILED"});
         console.log(`[ERROR]    prob can't find room: ${roomId}. ${e}`);
     }
 });
@@ -97,10 +110,10 @@ router.post("/addRanking/:roomId", async function (req, res) {
             room["scores"].set(ranking[i], oldScore + ranking.length - i - 1);
         }
         console.log(`[SUCCESS]    Added ranking: ${ranking} to room: ${roomId}`);
-        console.log('rooms: ',rooms);
+        console.log('rooms: ', rooms);
         res.json({ message: "SUCCESS" });
     } catch (e) {
-        res.json([]);
+        res.json({ message: "FAILED" });
         console.log(`[ERROR]    prob can't find room: ${roomId}. ${e}`);
     }
 });
@@ -113,7 +126,7 @@ router.get("/getScores/:roomId", function (req, res) {
         })[0]["scores"];
         var scoreArray = [];
         scores.forEach((score, imageURL) => {
-            scoreArray.push({score: score, imageURL: imageURL});
+            scoreArray.push({ score: score, imageURL: imageURL });
         });
         scoreArray.sort((a, b) => {
             return b.score - a.score;
@@ -125,10 +138,4 @@ router.get("/getScores/:roomId", function (req, res) {
     }
 });
 
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build/index.html'), function(err) {
-      if (err) {
-        res.status(500).send(err)
-      }
-    })
-  })
+module.exports = app;
