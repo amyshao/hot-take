@@ -19,11 +19,23 @@ Clone the repo
 ```
 git clone https://github.com/amyshao/hot-take
 ```  
-Run the Express server with React app on ``localhost:3000``
+Build React frontend
 ```
+cd client
+npm install
+npm run build
+```
+Run the Express server with React app
+```
+cd ..
+npm install
 npm start
 ```
-Run test suite
+Then go to ``localhost:3000``  
+
+## Testing
+API test suite using Mocha and Chai.  
+To run tests, first make sure nothing is running on ``localhost:3000`` 
 ```
 npm test
 ```
